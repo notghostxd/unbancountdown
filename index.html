@@ -1,84 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>When will I get unbanned?</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #333; /* Dark Gray Background */
-            flex-direction: column; /* Stack the text and countdown vertically */
-        }
-        .header {
-            color: white;
-            font-size: 28px;
-            margin-bottom: 20px; /* Adds space between the text and countdown */
-            font-weight: bold; /* Make the header text bold */
-        }
-        .countdown {
-            background-color: #222; /* Dark background for the countdown */
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold; /* Make the countdown text bold */
-        }
-        .play-button {
-            margin-top: 30px; /* Adds space between countdown and the image */
-        }
-        .play-button img {
-            width: 150px; /* Set image width */
-            height: auto; /* Keep aspect ratio */
-            cursor: pointer; /* Change cursor to pointer when hovered */
-            transition: transform 0.3s ease; /* Smooth zoom effect */
-            border-radius: 10px; /* Rounded corners */
-        }
-        .play-button img:hover {
-            transform: scale(1.1); /* Slight zoom effect on hover */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unban Countdown</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    #countdown {
+      background-color: #2a2a2a;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .play-button {
+      margin-top: 2rem;
+    }
+
+    .play-button img {
+      width: 160px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .play-button img:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      #countdown {
+        font-size: 1.2rem;
+      }
+
+      .play-button img {
+        width: 120px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">When will I get unbanned?</div>
-    <div class="countdown" id="countdown"></div>
+  <h1>When Will I Get Unbanned?</h1>
+  <div id="countdown" aria-live="polite">Loading countdown...</div>
 
-    <!-- Play Button Image with Link -->
-    <div class="play-button">
-        <a href="https://www.roblox.com/games/78453932515341" target="_blank">
-            <img src="playbutton.png" alt="Play Button"> <!-- Image source updated to 'playbutton.png' -->
-        </a>
-    </div>
+  <div class="play-button">
+    <a href="https://www.roblox.com/games/78453932515341" target="_blank" rel="noopener">
+      <img src="playbutton.png" alt="Play on Roblox">
+    </a>
+  </div>
 
-    <script>
-        // Set the date you're unbanned (replace with your exact unban date and time)
-        var unbanDate = new Date("2026-02-21T13:37:00Z").getTime(); // Adjusted for UTC
+  <script>
+    const unbanDate = new Date("2026-02-21T13:37:00Z").getTime();
 
-        // Update the countdown every 1 second
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var timeLeft = unbanDate - now;
+    const countdownElement = document.getElementById("countdown");
 
-            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const timeLeft = unbanDate - now;
 
-            // Display the result
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (timeLeft <= 0) {
+        countdownElement.textContent = "I am now unbanned from Roblox!";
+        clearInterval(interval);
+        return;
+      }
 
-            // If the countdown ends, display a message
-            if (timeLeft < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "You are unbanned from Roblox!";
-            }
-        }, 1000);
-    </script>
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // initial call
+  </script>
 </body>
 </html>
