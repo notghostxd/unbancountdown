@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unban Countdown</title>
+  <title>Time is ticking.</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,7 +11,7 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #1e1e1e;
+      background: linear-gradient(135deg, #1e1e1e, #2e2e2e, #1a1a1a);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -24,53 +24,69 @@
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #f5f5f5;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #ccc;
     }
 
     #countdown {
-      background-color: #2a2a2a;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-size: 1.5rem;
+      background: rgba(42, 42, 42, 0.9);
+      padding: 1.5rem 3rem;
+      border-radius: 12px;
+      font-size: 1.8rem;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .play-button {
-      margin-top: 2rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      margin-bottom: 2rem;
     }
 
     .play-button img {
-      width: 160px;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
+      width: 180px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
     }
 
     .play-button img:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      color: #999;
     }
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
 
       #countdown {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
       }
 
       .play-button img {
-        width: 120px;
+        width: 130px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>When Will I Get Unbanned?</h1>
+  <h1>Time is ticking.</h1>
+  <h2>Counting down until unban…</h2>
   <div id="countdown" aria-live="polite">Loading countdown...</div>
 
   <div class="play-button">
@@ -79,10 +95,14 @@
     </a>
   </div>
 
+  <footer>&copy; <span id="year"></span> All Rights Reserved</footer>
+
   <script>
     const unbanDate = new Date("2026-02-21T13:37:00Z").getTime();
-
     const countdownElement = document.getElementById("countdown");
+    const yearElement = document.getElementById("year");
+
+    yearElement.textContent = new Date().getFullYear();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -103,7 +123,7 @@
     };
 
     const interval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // initial call
+    updateCountdown();
   </script>
 </body>
 </html>
