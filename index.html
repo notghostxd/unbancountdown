@@ -86,7 +86,7 @@
 </head>
 <body>
   <h1>Time is ticking.</h1>
-  <h2>Counting down until unban…</h2>
+  <h2>Counting down until... hes back.</h2>
   <div id="countdown" aria-live="polite">Loading countdown...</div>
 
   <div class="play-button">
@@ -109,7 +109,7 @@
       const timeLeft = unbanDate - now;
 
       if (timeLeft <= 0) {
-        countdownElement.textContent = "I am now unbanned from Roblox!";
+        countdownElement.textContent = "The time has now.. ended.";
         clearInterval(interval);
         return;
       }
