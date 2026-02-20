@@ -12,9 +12,12 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1a1a2e);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
+      background-color: #8b0000;
+      background-image: url("spectre.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -24,12 +27,6 @@
       margin: 0;
       padding: 20px;
       text-align: center;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     h1 {
@@ -56,6 +53,7 @@
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
       margin-bottom: 2rem;
       backdrop-filter: blur(6px);
+      transition: color 0.5s ease;
     }
 
     .play-button img {
