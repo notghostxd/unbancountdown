@@ -91,7 +91,7 @@
   </div>
 
   <script>
-    const unbanDate = new Date("2026-02-21T13:37:00Z").getTime();
+    const unbanDate = new Date("2026-02-21T13:37:00-06:00").getTime();
     const countdownElement = document.getElementById("countdown");
 
     const updateCountdown = () => {
@@ -100,6 +100,7 @@
 
       if (timeLeft <= 0) {
         countdownElement.textContent = "go ahead and ping me on discord cuz wow i should be hyped.";
+        countdownElement.style.color = "#00ff66";
         clearInterval(interval);
         return;
       }
